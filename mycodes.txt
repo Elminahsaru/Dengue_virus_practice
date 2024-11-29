@@ -1,0 +1,21 @@
+mkdir -p Desktop/Project_dengue/codes Desktop/Project_dengue/data
+mv dengue.zip ~/Desktop/Project_dengue/data
+unzip dengue.zip
+
+
+wc dengueseq1.fasta dengueseq2.fasta dengueseq3.fasta dengueseq4.fasta dengueseq5.fasta 
+cat dengueseq1.fasta dengueseq2.fasta dengueseq3.fasta dengueseq4.fasta dengueseq5.fasta > dengue_merged.fasta
+[merging all files ] : <> 
+cat dengueseq1.fasta dengueseq2.fasta dengueseq3.fasta dengueseq4.fasta dengueseq5.fasta > dengue_merged.fasta
+[count headers] : <> 
+grep -c ">" data_merged.fasta
+[extract headers] : <> 
+grep ">" dengue_merged.fasta >dengue_headers.txt
+[view headers] : <> 
+cat dengue_headers.txt 
+[extract viruses] : <>
+grep ">" dengue_merged.fasta | awk -F'|' '{print $1}' | sed 's/^>//' > viruses.txt 
+[extract sequences] : <>
+grep -v "^>" dengue_merged.fasta > dengue_seq.txt
+[translate to lower] : <>
+tr '[:upper:]' '[:lower:]' < dengue_seq.txt > dengue_seq2.txt
